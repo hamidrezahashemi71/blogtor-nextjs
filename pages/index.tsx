@@ -1,13 +1,15 @@
 import Head from "next/head";
 import Site from "../layout/Site";
-import type {ReactElement} from "react";
-import {NextPageWithLayout} from "./_app";
+import {ReactElement} from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {decrement, increment, selectValue} from "../State/Slices/CounterSlice";
-import {RootState} from "../State/Store";
+import {selectUser} from "../State/Slices/CurrentUserSlice";
+import {getTopWriters, getTopBlogs} from "../lib/apis";
+import {Writer, TopWriters, Blog, TopBlogs} from "../lib/interfaces";
 
-const Home: NextPageWithLayout = () => {
-  const count = useSelector(selectValue);
+const Home = ({topWriters}: TopWriters) => {
+  // const y = topWriters;
+  // console.log(y);
+  const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
   return (
     <>
@@ -17,9 +19,10 @@ const Home: NextPageWithLayout = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div>Welcome to Blogtor</div>
-      <button onClick={() => dispatch(increment())}>Increment</button>
+      {/* <button onClick={() => dispatch(increment())}>Increment</button>
       <button onClick={() => dispatch(decrement())}>Decrement</button>
       <h1>The value of the counter is {count}</h1>
+      <h1>The value of customKey is: {process.env.DOMAIN}</h1> */}
     </>
   );
 };
@@ -29,3 +32,16 @@ Home.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  const topWriters: Writer[] = await getTopWriters();
+  const topBlogs: Blog[] = await getTopBlogs();
+  return {
+    props: {
+      topWriters,
+      topBlogs,
+    },
+  };
+}
+
+

@@ -1,5 +1,5 @@
-import Navbar from "../components/general/Navbar";
-import Footer from "../components/general/Footer";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Site = ({children}: React.PropsWithChildren<{}>) => {
   return (
