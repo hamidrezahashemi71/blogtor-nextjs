@@ -6,8 +6,5 @@ const About: NextPageWithLayout = () => {
   return <div>About</div>;
 };
 
-About.getLayout = function getLayout(page: ReactElement) {
-  return <Site>{page}</Site>;
-};
 
 export default About;

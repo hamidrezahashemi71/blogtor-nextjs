@@ -7,7 +7,7 @@ import {useRouter} from "next/router";
 
 const Register: NextPageWithLayout = () => {
   const [regInfo, setRegInfo] = useState({
-    username: "sara joon",
+    username: "sara joooooon",
     name: "sara",
   });
 

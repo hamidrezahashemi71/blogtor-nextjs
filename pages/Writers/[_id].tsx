@@ -8,9 +8,6 @@ const SingleWriterPage = ({singleWriter, blogsByWriter}: SingleWriterProps) => {
   return <div>SingleWriter</div>;
 };
 
-SingleWriterPage.getLayout = function getLayout(page: ReactElement) {
-  return <Site>{page}</Site>;
-};
 
 export default SingleWriterPage;
 

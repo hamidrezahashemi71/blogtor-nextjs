@@ -27,9 +27,6 @@ const Home = ({topWriters}: TopWriters) => {
   );
 };
 
-Home.getLayout = function getLayout(page: ReactElement) {
-  return <Site>{page}</Site>;
-};
 
 export default Home;
 

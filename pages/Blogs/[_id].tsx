@@ -26,9 +26,6 @@ const SingleBlogPage = ({singleBlog}: SingleBlogObj) => {
   );
 };
 
-SingleBlogPage.getLayout = function getLayout(page: ReactElement) {
-  return <Site>{page}</Site>;
-};
 
 export default SingleBlogPage;
 

@@ -28,8 +28,5 @@ const Login: NextPageWithLayout = () => {
   return <button onClick={Login}>Login</button>;
 };
 
-Login.getLayout = function getLayout(page: ReactElement) {
-  return <Site>{page}</Site>;
-};
 
 export default Login;

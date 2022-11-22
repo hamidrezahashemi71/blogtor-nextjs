@@ -8,9 +8,7 @@ const Writers = (props: AllWriters) => {
   return <div>Writers</div>;
 };
 
-Writers.getLayout = function getLayout(page: ReactElement) {
-  return <Site>{page}</Site>;
-};
+
 
 export default Writers;
 
