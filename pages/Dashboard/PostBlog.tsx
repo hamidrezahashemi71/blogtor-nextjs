@@ -3,6 +3,7 @@ import {ReactElement, useState} from "react";
 import Panel from "../../layout/Panel";
 import {postBlog} from "../../lib/apis";
 import {useRouter} from "next/router";
+import {Button, Container} from "@mui/material";
 
 const PostBlog: NextPageWithLayout = () => {
   const router = useRouter();
@@ -26,7 +27,16 @@ const PostBlog: NextPageWithLayout = () => {
     if (data.msg === "Unathorized") return alert("badam ridi");
   }
 
-  return <button onClick={post}>Post Blog</button>;
+  return (
+    <Container>
+      <Button
+        color='secondary'
+        // sx={{display: "flex", justifyContent: "center", alignItems: "center"}}
+        onClick={post}>
+        Post Blog
+      </Button>
+    </Container>
+  );
 };
 
 PostBlog.getLayout = function getLayout(page: ReactElement) {

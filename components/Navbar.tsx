@@ -7,39 +7,39 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import {useSelector} from "react-redux";
-import {selectUser} from "../State/Slices/CurrentUserSlice";
+import Profile from "./Profile";
+import Link from "next/link";
+import {useRouter} from "next/router";
 
-function ResponsiveAppBar() {
-  const pages = ["Blogs", "Writers", "About", "Contact"];
-  const settings = ["Dashboard", "Logout"];
-  const currentUser = useSelector(selectUser);
-  console.log(currentUser);
+function ResponsiveAppBar({loggedIn}: any) {
+  const router = useRouter();
+  const pageNavigation = [
+    {name: "Home", href: "/", id: 1},
+    {name: "Blogs", href: "/Blogs", id: 2},
+    {name: "Writers", href: "/Writers", id: 3},
+    {name: "About", href: "/About", id: 4},
+    {name: "Contact", href: "/Contact", id: 5},
+  ];
+  const loginNavigation = [
+    {name: "Login", href: "/Login", id: 1},
+    {name: "Register", href: "/Register", id: 2},
+  ];
+
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
     <AppBar position='static'>
-      <Container maxWidth='xl'>
+      <Container maxWidth={false} disableGutters>
         <Toolbar disableGutters>
           <Box sx={{flexGrow: 1, display: {xs: "flex", md: "none"}}}>
             <IconButton
@@ -68,131 +68,70 @@ function ResponsiveAppBar() {
               sx={{
                 display: {xs: "block", md: "none"},
               }}>
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center' color='primary.dark'>
-                    {page}
-                  </Typography>
-                </MenuItem>
+              {pageNavigation.map((item) => (
+                <Link href={item.href} key={item.id}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign='center' color='primary.dark'>
+                      {item.name}
+                    </Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
           <Box sx={{flexGrow: 1, display: {xs: "none", md: "flex"}}}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  fontWeight: 700,
-                  my: 2,
-                  bgcolor: "primary",
-                  display: "block",
-                  color: "#333333",
-                  ":hover": {
-                    bgcolor: "primary.light",
-                    color: "primary.dark",
-                  },
-                }}>
-                {page}
-              </Button>
+            {pageNavigation.map((item) => (
+              <Link href={item.href} key={item.id}>
+                <Button
+                  variant='navButtons'
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    color: `${
+                      router.pathname === item.href ? "black" : "#00AAA1"
+                    } `,
+                  }}>
+                  {item.name}
+                </Button>
+              </Link>
             ))}
           </Box>
           <Container>
             <Typography
-              variant='h6'
+              variant='logo'
               noWrap
-              component='a'
-              href='/'
-              sx={{
-                ml: "10rem",
-                display: {xs: "none", md: "flex"},
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: "0.3rem",
-                color: "primary.dark",
-                textDecoration: "none",
-              }}>
-              BLOGTOR
+              sx={{display: {xs: "none", md: "flex"}, ml: "10rem"}}>
+              <Link href='/' passHref>
+                BLOGTOR
+              </Link>
             </Typography>
           </Container>
           <Container>
             <Typography
-              variant='h5'
-              noWrap
-              component='a'
-              href=''
+              variant='logo'
               sx={{
-                mr: 2,
                 display: {xs: "flex", md: "none"},
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: "0.3rem",
-                color: "primary.dark",
-                textDecoration: "none",
+                // mr: 2,
               }}>
               BLOGTOR
             </Typography>
           </Container>
-          {currentUser ? (
-            <Box sx={{flexGrow: 0}}>
-              <Tooltip title='Profile'>
-                <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                  <Avatar alt='user-avatar' src='/static/images/avatar/2.jpg' />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{mt: "45px"}}
-                id='menu-appbar'
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}>
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign='center'>{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
+          {loggedIn ? (
+            <Profile />
           ) : (
             <Box sx={{flexGrow: 1, display: {xs: "flex", md: "flex"}}}>
-              <Button
-                sx={{
-                  fontWeight: 500,
-                  my: 2,
-                  bgcolor: "primary",
-                  display: "block",
-                  color: "#333333",
-                  ":hover": {
-                    bgcolor: "primary.light",
-                    color: "primary.dark",
-                  },
-                }}>
-                Login
-              </Button>
-              <Button
-                sx={{
-                  fontWeight: 500,
-                  my: 2,
-                  bgcolor: "primary",
-                  display: "block",
-                  color: "#333333",
-                  ":hover": {
-                    bgcolor: "primary.light",
-                    color: "primary.dark",
-                  },
-                }}>
-                Register
-              </Button>
+              {loginNavigation.map((item) => (
+                <Link href={item.href} key={item.id}>
+                  <Button
+                    variant='navButtons'
+                    sx={{
+                      color: `${
+                        router.pathname === item.href ? "black" : "#00AAA1"
+                      } `,
+                    }}>
+                    {item.name}
+                  </Button>
+                </Link>
+              ))}
             </Box>
           )}
         </Toolbar>

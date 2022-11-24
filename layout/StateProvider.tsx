@@ -2,14 +2,17 @@ import {getCurrentUser} from "../lib/apis";
 import {useEffect, useState} from "react";
 import Site from "./Site";
 import Panel from "./Panel";
-import {useDispatch} from "react-redux";
-import {setCurrentUser} from "../State/Slices/CurrentUserSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectUser, setCurrentUser} from "../State/Slices/CurrentUserSlice";
 import {useRouter} from "next/router";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const StateProvider = ({children}: any) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const thisUser = useSelector(selectUser);
 
   useEffect(() => {
     fetchMe();
@@ -17,22 +20,24 @@ const StateProvider = ({children}: any) => {
 
   async function fetchMe() {
     const currentUser = await getCurrentUser();
+    console.log(currentUser);
     dispatch(setCurrentUser(currentUser));
     setLoading(false);
   }
 
+  if (loading) return <h1>Loading...</h1>;
   if (router.asPath.includes("Dashboard"))
     return (
       <Panel>
         <main>{children}</main>
       </Panel>
     );
-
-  if (loading) return <h1>Loading...</h1>;
   return (
-    <Site>
-      <main>{children}</main>
-    </Site>
+    <>
+      <Navbar loggedIn={!!thisUser} />
+      <main style={{minHeight: "100vh"}}>{children}</main>
+      <Footer />
+    </>
   );
 };
 

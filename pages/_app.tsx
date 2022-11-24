@@ -19,12 +19,11 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({Component, pageProps}: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page: ReactNode) => page);
   return (
     <Provider store={store}>
       <ThemeProvider theme={mainTheme}>
         <StateProvider>
-          {getLayout(<Component {...pageProps} />)}
+          <Component {...pageProps} />
           <ToastContainer />
         </StateProvider>
       </ThemeProvider>
