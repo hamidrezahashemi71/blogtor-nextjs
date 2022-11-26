@@ -13,6 +13,7 @@ declare module "@mui/material/Typography" {
     logo: true;
     mainText: true;
     title: true;
+    fadeText: true;
   }
 }
 
@@ -31,6 +32,7 @@ const color = {
     main: "#E8F3F3",
     mainText: "#555555",
     title: "#222222",
+    fadeText: "#777777",
   },
 };
 
@@ -63,7 +65,7 @@ export const mainTheme = createTheme({
           props: {variant: "outlineButtons"},
           style: {
             fontWeight: 700,
-            width: "145px",
+
             color: primary.dark,
             backgroundColor: "transparent",
             border: `1px solid ${primary.dark}`,
@@ -129,6 +131,17 @@ export const mainTheme = createTheme({
             color: primary.title,
             fontSize: 17,
             textAlign: "center",
+          },
+        },
+        {
+          props: {variant: "fadeText"},
+          style: {
+            fontFamily: "Noto Sans",
+            fontWeight: 400,
+            textDecoration: "none",
+            color: primary.fadeText,
+            fontSize: 12,
+            textAlign: "start",
           },
         },
       ],

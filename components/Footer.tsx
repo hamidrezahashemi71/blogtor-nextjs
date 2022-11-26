@@ -59,6 +59,7 @@ export default function SimpleBottomNavigation() {
             <Typography variant='title'>Pages</Typography>
             <Typography variant='mainText'>
               <Container
+                disableGutters
                 sx={{
                   display: "flex",
                   flexDirection: "column",
@@ -82,6 +83,7 @@ export default function SimpleBottomNavigation() {
             <Typography variant='title'>Sign In</Typography>
             <Typography variant='mainText'>
               <Container
+                disableGutters
                 sx={{
                   display: "flex",
                   flexDirection: "column",
@@ -103,7 +105,7 @@ export default function SimpleBottomNavigation() {
             variant='footerPaper'
             sx={{bgcolor: "primary.main"}}>
             <Typography variant='title'>Keep in touch</Typography>
-            <Container sx={{display: "flex"}}>
+            <Container disableGutters sx={{display: "flex"}}>
               <TextField id='filled-basic' label='Filled' variant='filled' />
               <Button variant='normalButtons'>Subscribe</Button>
             </Container>

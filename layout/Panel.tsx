@@ -26,20 +26,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import Profile from "../components/Profile";
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant='body2'
-      color='text.secondary'
-      align='center'
-      {...props}>
-      {"Copyright © "}
-      Blogtor {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Copyright from "../components/Copyright";
 
 const drawerWidth: number = 240;
 
@@ -216,7 +203,7 @@ const Panel = ({children}: React.PropsWithChildren<{}>) => {
             height: "100vh",
           }}>
           <main>{children}</main>
-          {/* <Copyright sx={{pb: 4}} /> */}
+          <Copyright sx={{pb: 4}} />
         </Container>
       </Box>
     </>

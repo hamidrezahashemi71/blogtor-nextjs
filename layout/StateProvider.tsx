@@ -20,7 +20,7 @@ const StateProvider = ({children}: any) => {
 
   async function fetchMe() {
     const currentUser = await getCurrentUser();
-    console.log(currentUser);
+    // console.log(currentUser);
     dispatch(setCurrentUser(currentUser));
     setLoading(false);
   }

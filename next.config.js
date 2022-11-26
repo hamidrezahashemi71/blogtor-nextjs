@@ -6,6 +6,17 @@ const nextConfig = {
     DOMAIN: "http://localhost:4000/",
     TITLE: "Blogtor!",
   },
+  images: {
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "localhost:4000",
+        },
+      ],
+      domains: ["images.amcnetworks.com"],
+    },
+  },
 };
 
 module.exports = nextConfig

@@ -13,7 +13,7 @@ import {useSelector} from "react-redux";
 
 const Profile = () => {
   const currentUser = useSelector(selectUser);
-  console.log(currentUser);
+  // console.log(currentUser);
   const settings = ["Dashboard", "Logout"];
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -43,10 +43,19 @@ const Profile = () => {
       <Tooltip title='Profile'>
         <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
           <Avatar
-            // sx={{objectFit: ""}}
             alt='user-avatar'
-            src={`${process.env.DOMAIN}${currentUser.avatar}`}
-          />
+            sx={{objectFit: "cover"}}
+            src={`${process.env.DOMAIN}${currentUser!.avatar}`}>
+            <img
+              width={"40px"}
+              height={"40px"}
+              style={{
+                objectFit: "cover",
+              }}
+              src={"/assets/images/default-avatar.png"}
+              alt='fallback-avatar'
+            />
+          </Avatar>
         </IconButton>
       </Tooltip>
       <Menu

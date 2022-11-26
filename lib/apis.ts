@@ -79,7 +79,7 @@ export const getComments = async (_id: string) => {
 };
 
 // POST DATA ************************************************************************
-// dashboard layout
+// dashboard layout, register
 export const getCurrentUser = async () => {
   const res = await fetch(`${process.env.DOMAIN}user/me`, {
     method: "POST",
