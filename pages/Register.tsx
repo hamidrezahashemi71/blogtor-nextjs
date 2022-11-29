@@ -1,9 +1,12 @@
 import {useState, useEffect} from "react";
+import {useRouter} from "next/router";
 import {NextPageWithLayout} from "./_app";
 import {getCurrentUser, postRegisterInfo} from "../lib/apis";
 import {RegInfo} from "../lib/interfaces";
-import {useRouter} from "next/router";
-import * as React from "react";
+import {setCurrentUser, selectUser} from "../State/Slices/CurrentUserSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {toast} from "react-toastify";
+import Copyright from "../components/Copyright";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,15 +17,15 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {toast} from "react-toastify";
-import Copyright from "../components/Copyright";
-import {setCurrentUser, selectUser} from "../State/Slices/CurrentUserSlice";
-import {useDispatch, useSelector} from "react-redux";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import {string} from "zod";
 
 const Register: NextPageWithLayout = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectUser);
+  const [loading, setLoading] = useState(true);
+
   const [regInfo, setRegInfo] = useState<RegInfo | any>({
     name: {
       value: "",
@@ -35,13 +38,9 @@ const Register: NextPageWithLayout = () => {
       errorMessage: "You must enter a name",
     },
   });
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const currentUser = useSelector(selectUser);
 
   useEffect(() => {
-    currentUser ? router.push("/Dashboard") : setLoading(false);
+    currentUser ? router.push("/Dashboard/MyBlogs") : setLoading(false);
   }, []);
 
   async function Register() {
@@ -62,6 +61,7 @@ const Register: NextPageWithLayout = () => {
       }
       return setRegInfo(newRegInfo);
     }
+
     const regData = await postRegisterInfo(
       regInfo.username.value,
       regInfo.name.value
@@ -71,7 +71,7 @@ const Register: NextPageWithLayout = () => {
       return toast.error("This username already exists!");
     const currentUser = await getCurrentUser();
     dispatch(setCurrentUser(currentUser));
-    router.push("/Dashboard");
+    router.push("/Dashboard/MyBlogs");
   }
 
   if (loading) return <h1>Loading...</h1>;

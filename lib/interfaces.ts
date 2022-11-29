@@ -127,13 +127,18 @@ export interface Comment {
   _id?: string;
 }
 
-export interface RegInfoObj {
+export interface InputInfoObj {
   value: string;
   error: boolean;
   errorMessage: string;
 }
 
 export interface RegInfo {
-  name: RegInfoObj;
-  username: RegInfoObj;
+  name: InputInfoObj;
+  username: InputInfoObj;
+}
+
+export interface LoginInfo {
+  username: InputInfoObj;
+  password: InputInfoObj;
 }

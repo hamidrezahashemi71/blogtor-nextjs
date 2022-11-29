@@ -1,3 +1,9 @@
+import React, {useState} from "react";
+import Link from "next/link";
+import {useRouter} from "next/router";
+import {selectUser} from "../State/Slices/CurrentUserSlice";
+import {useSelector, useDispatch} from "react-redux";
+import {signOut} from "../State/Slices/CurrentUserSlice";
 import {
   Avatar,
   IconButton,
@@ -7,12 +13,6 @@ import {
   Typography,
 } from "@mui/material";
 import {Box} from "@mui/system";
-import React, {useState} from "react";
-import {selectUser} from "../State/Slices/CurrentUserSlice";
-import {useSelector, useDispatch} from "react-redux";
-import Link from "next/link";
-import {useRouter} from "next/router";
-import {signOut} from "../State/Slices/CurrentUserSlice";
 
 const Profile = () => {
   const currentUser = useSelector(selectUser);
@@ -20,7 +20,7 @@ const Profile = () => {
   const router = useRouter();
   console.log(currentUser);
   const settings = [
-    {name: "Dashboard", href: "Dashboard/MyBlogs", id: 1},
+    {name: "Dashboard", href: "/Dashboard/MyBlogs", id: 1},
     {name: "Log Out", href: "", id: 2},
   ];
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
