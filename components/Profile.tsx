@@ -9,12 +9,20 @@ import {
 import {Box} from "@mui/system";
 import React, {useState} from "react";
 import {selectUser} from "../State/Slices/CurrentUserSlice";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import Link from "next/link";
+import {useRouter} from "next/router";
+import {signOut} from "../State/Slices/CurrentUserSlice";
 
 const Profile = () => {
   const currentUser = useSelector(selectUser);
-  // console.log(currentUser);
-  const settings = ["Dashboard", "Logout"];
+  const dispatch = useDispatch();
+  const router = useRouter();
+  console.log(currentUser);
+  const settings = [
+    {name: "Dashboard", href: "Dashboard/MyBlogs", id: 1},
+    {name: "Log Out", href: "", id: 2},
+  ];
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -38,14 +46,17 @@ const Profile = () => {
           fontWeight: "bold",
           fontSize: "12px",
         }}>
-        Welcome {currentUser?.name.toUpperCase()}
+        Welcome {currentUser?.name}
       </Typography>
+
       <Tooltip title='Profile'>
         <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
           <Avatar
             alt='user-avatar'
             sx={{objectFit: "cover"}}
-            src={`${process.env.DOMAIN}${currentUser!.avatar}`}>
+            src={`${process.env.DOMAIN}${
+              currentUser ? currentUser.avatar : null
+            }`}>
             <img
               width={"40px"}
               height={"40px"}
@@ -74,9 +85,22 @@ const Profile = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}>
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign='center'>{setting}</Typography>
-          </MenuItem>
+          <Link href={setting.href}>
+            <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
+              <Typography
+                textAlign='center'
+                onClick={
+                  setting.name === "Log Out"
+                    ? () => {
+                        dispatch(signOut());
+                        router.push("/");
+                      }
+                    : null
+                }>
+                {setting.name}
+              </Typography>
+            </MenuItem>
+          </Link>
         ))}
       </Menu>
     </Box>

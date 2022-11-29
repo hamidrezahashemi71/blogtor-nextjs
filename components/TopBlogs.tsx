@@ -27,7 +27,7 @@ const TopBlogs = ({topBlogs}: TopBlogs) => {
           alignItems: "center",
           mb: "20px",
           ml: 0,
-        }}> 
+        }}>
         <Typography
           variant='logo'
           sx={{display: "flex", alignItems: "center", gap: "2px"}}>
@@ -45,7 +45,7 @@ const TopBlogs = ({topBlogs}: TopBlogs) => {
           ))}
         </Grid>
       ) : (
-        <Typography>Hanooz Useri Sabte Nam Nakarde</Typography>
+        <Typography>Hanooz Blogi Neveshte nashode</Typography>
       )}
     </Container>
   );

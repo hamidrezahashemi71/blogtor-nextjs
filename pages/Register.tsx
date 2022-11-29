@@ -1,7 +1,7 @@
-import Site from "../layout/Site";
-import {ReactElement, useState, useEffect} from "react";
+import {useState, useEffect} from "react";
 import {NextPageWithLayout} from "./_app";
 import {getCurrentUser, postRegisterInfo} from "../lib/apis";
+import {RegInfo} from "../lib/interfaces";
 import {useRouter} from "next/router";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
@@ -18,11 +18,22 @@ import {toast} from "react-toastify";
 import Copyright from "../components/Copyright";
 import {setCurrentUser, selectUser} from "../State/Slices/CurrentUserSlice";
 import {useDispatch, useSelector} from "react-redux";
+import InputAdornment from "@mui/material/InputAdornment";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import {string} from "zod";
 
 const Register: NextPageWithLayout = () => {
-  const [regInfo, setRegInfo] = useState({
-    username: "",
-    name: "",
+  const [regInfo, setRegInfo] = useState<RegInfo | any>({
+    name: {
+      value: "",
+      error: false,
+      errorMessage: "You must enter a name",
+    },
+    username: {
+      value: "",
+      error: false,
+      errorMessage: "You must enter a name",
+    },
   });
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -34,17 +45,37 @@ const Register: NextPageWithLayout = () => {
   }, []);
 
   async function Register() {
-    const regData = await postRegisterInfo(regInfo.username, regInfo.name);
-    console.log(regData);
+    const {name, username} = regInfo;
+    if (!name.value || !username.value) {
+      const formFields = Object.keys(regInfo);
+      let newRegInfo = {...regInfo};
+
+      for (let index = 0; index < formFields.length; index++) {
+        const currentField = formFields[index];
+        newRegInfo = {
+          ...newRegInfo,
+          [currentField]: {
+            ...newRegInfo[currentField],
+            error: newRegInfo[currentField]["value"] ? false : true,
+          },
+        };
+      }
+      return setRegInfo(newRegInfo);
+    }
+    const regData = await postRegisterInfo(
+      regInfo.username.value,
+      regInfo.name.value
+    );
+
     if (regData.msg === "this username already exists in the database")
       return toast.error("This username already exists!");
-    if (regData.msg === "bad input") return toast.error("Fill All Fields!");
     const currentUser = await getCurrentUser();
     dispatch(setCurrentUser(currentUser));
     router.push("/Dashboard");
   }
 
   if (loading) return <h1>Loading...</h1>;
+  // console.log("NAME", regInfo.name, "USERNAME", regInfo.username);
   return (
     <Container maxWidth='xs'>
       <CssBaseline />
@@ -72,7 +103,26 @@ const Register: NextPageWithLayout = () => {
                 id='name'
                 label='Name'
                 autoFocus
-                onChange={(e) => setRegInfo({...regInfo, name: e.target.value})}
+                error={regInfo.name.error}
+                helperText={regInfo.name.error && regInfo.name.errorMessage}
+                onChange={(e) => {
+                  const {name, value} = e.target;
+                  setRegInfo({
+                    ...regInfo,
+                    [name]: {
+                      ...regInfo[name],
+                      value,
+                      error: false,
+                    },
+                  });
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position='start'>
+                      <AccountCircle />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -82,10 +132,22 @@ const Register: NextPageWithLayout = () => {
                 id='username'
                 label='User Name'
                 name='username'
-                autoComplete='false'
-                onChange={(e) =>
-                  setRegInfo({...regInfo, username: e.target.value})
+                autoComplete=''
+                error={regInfo.username.error}
+                helperText={
+                  regInfo.username.error && regInfo.username.errorMessage
                 }
+                onChange={(e) => {
+                  const {name, value} = e.target;
+                  setRegInfo({
+                    ...regInfo,
+                    [name]: {
+                      ...regInfo[name],
+                      value,
+                      error: false,
+                    },
+                  });
+                }}
               />
             </Grid>
           </Grid>
@@ -113,9 +175,4 @@ const Register: NextPageWithLayout = () => {
   );
 };
 
-Register.getLayout = function getLayout(page: ReactElement) {
-  return <Site>{page}</Site>;
-};
-
 export default Register;
-
