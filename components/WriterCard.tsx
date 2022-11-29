@@ -4,7 +4,7 @@ import Link from "next/link";
 const moment = require("moment");
 
 const WriterCard = ({writer}: any) => {
-  console.log(writer);
+  // console.log(writer);
   const joinedDate = moment(writer.createdAt).format("dddd, MMMM Do YYYY");
   return (
     <Container

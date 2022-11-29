@@ -18,7 +18,7 @@ const Profile = () => {
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log(currentUser);
+  // console.log(currentUser);
   const settings = [
     {name: "Dashboard", href: "/Dashboard/MyBlogs", id: 1},
     {name: "Log Out", href: "", id: 2},
@@ -85,7 +85,7 @@ const Profile = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}>
         {settings.map((setting) => (
-          <Link href={setting.href}>
+          <Link href={setting.href} key={setting.id}>
             <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
               <Typography
                 textAlign='center'

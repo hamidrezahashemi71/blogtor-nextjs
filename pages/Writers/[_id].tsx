@@ -15,7 +15,7 @@ export async function getStaticPaths() {
   const writers = await getAllWriters();
   const paths = writers.map((writer: any) => ({
     params: {_id: writer._id},
-  }));
+  })); 
 
   return {paths, fallback: "blocking"};
 }

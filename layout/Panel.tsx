@@ -5,6 +5,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import {Container} from "@mui/material";
 import * as React from "react";
+import Profile from "../components/Profile";
+import Copyright from "../components/Copyright";
 import {styled} from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -17,16 +19,19 @@ import IconButton from "@mui/material/IconButton";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import InboxIcon from "@mui/icons-material/Inbox";
-import MailIcon from "@mui/icons-material/Mail";
 import {
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import Profile from "../components/Profile";
-import Copyright from "../components/Copyright";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import ArticleIcon from "@mui/icons-material/Article";
+import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
+import HomeIcon from "@mui/icons-material/Home";
+import BookIcon from "@mui/icons-material/Book";
+import AttributionIcon from "@mui/icons-material/Attribution";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const drawerWidth: number = 240;
 
@@ -80,15 +85,35 @@ const Drawer = styled(MuiDrawer, {
 
 const Panel = ({children}: React.PropsWithChildren<{}>) => {
   const upperNavigation = [
-    {name: "Profile", href: "/Dashboard/EditProfile", id: 1},
-    {name: "My Blogs", href: "/Dashboard/MyBlogs", id: 1},
-    {name: "Post Blog", href: "/Dashboard/PostBlog", id: 2},
+    {
+      name: "Profile",
+      href: "/Dashboard/EditProfile",
+      id: 1,
+      icon: <AccountBoxIcon />,
+    },
+    {
+      name: "My Blogs",
+      href: "/Dashboard/MyBlogs",
+      id: 1,
+      icon: <ArticleIcon />,
+    },
+    {
+      name: "Post Blog",
+      href: "/Dashboard/PostBlog",
+      id: 2,
+      icon: <DriveFileRenameOutlineIcon />,
+    },
   ];
   const lowerNavigation = [
-    {name: "Home", href: "/", id: 1},
-    {name: "Blogs", href: "/Blogs", id: 2},
-    {name: "Writers", href: "/Writers", id: 3},
-    {name: "Log Out", href: "", id: 4},
+    {name: "Home", href: "/", id: 1, icon: <HomeIcon />},
+    {name: "Blogs", href: "/Blogs", id: 2, icon: <BookIcon />},
+    {
+      name: "Writers",
+      href: "/Writers",
+      id: 3,
+      icon: <AttributionIcon />,
+    },
+    {name: "Log Out", href: "", id: 4, icon: <ExitToAppIcon />},
   ];
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -96,7 +121,7 @@ const Panel = ({children}: React.PropsWithChildren<{}>) => {
   };
 
   const currentUser = useSelector(selectUser);
-  console.log(currentUser);
+  // console.log(currentUser);
   const dispatch = useDispatch();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -165,12 +190,10 @@ const Panel = ({children}: React.PropsWithChildren<{}>) => {
           <Divider />
           <List>
             {upperNavigation.map((text, index) => (
-              <Link href={text.href}>
+              <Link href={text.href} key={text.id}>
                 <ListItem key={text.id} disablePadding>
                   <ListItemButton>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
+                    <ListItemIcon>{text.icon}</ListItemIcon>
                     <ListItemText primary={text.name} />
                   </ListItemButton>
                 </ListItem>
@@ -180,11 +203,11 @@ const Panel = ({children}: React.PropsWithChildren<{}>) => {
           <Divider sx={{my: 1}} />
           <List>
             {lowerNavigation.map((text, index) => (
-              <Link href={text.href}>
+              <Link href={text.href} key={text.id}>
                 <ListItem key={text.id} disablePadding>
                   <ListItemButton>
                     <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                      <ListItemIcon>{text.icon}</ListItemIcon>
                     </ListItemIcon>
                     <ListItemText primary={text.name} />
                   </ListItemButton>

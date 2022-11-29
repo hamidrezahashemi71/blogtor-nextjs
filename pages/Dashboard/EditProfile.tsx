@@ -57,7 +57,7 @@ const EditProfile: NextPageWithLayout = () => {
   const submitAvatar = async () => {
     if (!file) return;
     const data = await updateAvatar(file);
-    console.log(data);
+    // console.log(data);
   };
 
   const editProfile = () => {
@@ -69,7 +69,15 @@ const EditProfile: NextPageWithLayout = () => {
   return (
     <div>
       <input type='file' onChange={(e) => setFile(e.target.files![0])} />
-      <img src={eidtedWriter.avatar} alt='Avatar' />
+      <img
+        width={"40px"}
+        height={"40px"}
+        style={{
+          objectFit: "cover",
+        }}
+        src={eidtedWriter.avatar}
+        alt='Avatar'
+      />
       <input
         type='text'
         value={eidtedWriter?.name}

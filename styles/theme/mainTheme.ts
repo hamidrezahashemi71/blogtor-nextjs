@@ -47,6 +47,25 @@ export const mainTheme = createTheme({
   },
 
   components: {
+    // MuiTextField: {
+    //   styleOverrides: {
+    //     root: {
+    //       "&.custom-input": {
+    //         "& fieldset": {
+    //           border: `1px solid ${primary.dark}`,
+    //         },
+    //         "& .MuiInputBase-input:hover + fieldset": {
+    //           border: `2px solid ${primary.dark}`,
+    //         },
+    //         "& .MuiInputBase-input:focus + fieldset": {
+    //           border: `2px solid ${primary.dark}`,
+    //           backgroundColor: primary.light,
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
+
     MuiButton: {
       variants: [
         {

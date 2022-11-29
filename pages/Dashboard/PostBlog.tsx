@@ -8,7 +8,7 @@ import {Button, Container} from "@mui/material";
 const PostBlog: NextPageWithLayout = () => {
   const router = useRouter();
   const [blogInfo, setBlogInfo] = useState({
-    title: "Lebowski",
+    title: "Blog1",
     content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
     molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
     numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
@@ -31,7 +31,7 @@ const PostBlog: NextPageWithLayout = () => {
     totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam 
     quasi aliquam eligendi, placeat qui corporis!`,
     imgurl:
-      "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2019%2F02%2Fsam-elliott-1-2000.jpg",
+      "https://www.joblo.com/wp-content/uploads/2015/08/wiw-lebowski-facebook-1280x720.jpg",
   });
 
   async function post() {

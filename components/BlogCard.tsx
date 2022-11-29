@@ -1,7 +1,6 @@
 import {Typography} from "@mui/material";
 import {Container} from "@mui/system";
 import Link from "next/link";
-import Image from "next/image";
 const moment = require("moment");
 import Divider from "@mui/material/Divider";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";

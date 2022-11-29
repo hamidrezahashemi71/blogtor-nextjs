@@ -1,5 +1,4 @@
-import Site from "../../layout/Site";
-import {ReactElement, useState} from "react";
+import {useState} from "react";
 import {getAllBlogs, getSingleBlog, postRate} from "../../lib/apis";
 import {SingleBlog, SingleBlogObj} from "../../lib/interfaces";
 import {toast} from "react-toastify";
@@ -7,7 +6,7 @@ import Comments from "../../components/Comments";
 
 const SingleBlogPage = ({singleBlog}: SingleBlogObj) => {
   const [rate, setRate] = useState(4);
-  console.log(singleBlog);
+  // console.log(singleBlog);
 
   const submitRate = async () => {
     const data = await postRate(singleBlog._id, rate);
@@ -25,7 +24,6 @@ const SingleBlogPage = ({singleBlog}: SingleBlogObj) => {
     </>
   );
 };
-
 
 export default SingleBlogPage;
 

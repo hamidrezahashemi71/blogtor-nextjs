@@ -1,8 +1,7 @@
-import {Container, Grid, Typography} from "@mui/material";
-import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
-// import BlogCard from "../components/BlogCard";
 import {TopWriters, Writer} from "../lib/interfaces";
 import WriterCard from "./WriterCard";
+import {Container, Grid, Typography} from "@mui/material";
+import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 
 const TopWriters = ({topWriters}: TopWriters) => {
   return (

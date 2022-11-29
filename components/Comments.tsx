@@ -40,9 +40,13 @@ const Comments = ({blogId}: any) => {
       />
       <div>
         <ul>
-          {allComments.map((comment) => {
-            return <li key={comment._id}>{comment.text}</li>;
-          })}
+          {allComments.length ? (
+            allComments.map((comment) => {
+              return <li key={comment._id}>{comment.text}</li>;
+            })
+          ) : (
+            <h1>No Comments Yet!</h1>
+          )}
         </ul>
       </div>
     </>

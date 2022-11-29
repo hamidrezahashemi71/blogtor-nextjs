@@ -1,6 +1,5 @@
 import {NextPageWithLayout} from "../_app";
-import {ReactElement, useEffect, useState} from "react";
-import Panel from "../../layout/Panel";
+import {useEffect, useState} from "react";
 import {getMyBlogs} from "../../lib/apis";
 
 const MyBlogs: NextPageWithLayout = () => {
@@ -19,12 +18,10 @@ const MyBlogs: NextPageWithLayout = () => {
 
   if (loading) return <h1>Loading...</h1>;
   if (!myblogs.length) return <h1>felen post nazashte</h1>;
+  // console.log(myblogs);
   return <div>MyBlogs</div>;
 };
 
-MyBlogs.getLayout = function getLayout(page: ReactElement) {
-  return <Panel>{page}</Panel>;
-};
 
 export default MyBlogs;
 

@@ -77,7 +77,7 @@ const Login: NextPageWithLayout = () => {
   }
 
   if (loading) return <h1>Loading...</h1>;
-  console.log("USERNAME", loginInfo.username, "PASSWORD", loginInfo.password);
+  // console.log("USERNAME", loginInfo.username, "PASSWORD", loginInfo.password);
   return (
     <Container maxWidth='xs'>
       <CssBaseline />

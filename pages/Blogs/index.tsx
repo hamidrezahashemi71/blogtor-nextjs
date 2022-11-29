@@ -1,11 +1,11 @@
+import {useState} from "react";
 import Head from "next/head";
-import {Container, Grid, Typography} from "@mui/material";
-import BookIcon from "@mui/icons-material/Book";
 import {getAllBlogs} from "../../lib/apis";
 import {Blog, AllBlogs} from "../../lib/interfaces";
 import BlogCard from "../../components/BlogCard";
-import {useState} from "react";
 import SearchBar from "../../components/SearchBar";
+import {Container, Grid, Typography} from "@mui/material";
+import BookIcon from "@mui/icons-material/Book";
 
 const Blogs = ({allBlogs}: AllBlogs) => {
   const [searchVal, setSearchVal] = useState("");
@@ -52,9 +52,7 @@ const Blogs = ({allBlogs}: AllBlogs) => {
           <Grid container spacing={10} width={"100%"}>
             {allBlogs
               .filter((blog) =>
-                blog.title
-                  .toLocaleLowerCase()
-                  .includes(searchVal.toLocaleLowerCase())
+                blog.title.toLowerCase().includes(searchVal.toLowerCase())
               )
               .map((blog: Blog) => (
                 <Grid key={blog._id} item md={4} xs={12}>

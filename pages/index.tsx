@@ -9,7 +9,7 @@ import TopBlogs from "../components/TopBlogs";
 import TopWriters from "../components/TopWriters";
 
 const Home = ({topWriters, topBlogs}: any) => {
-  console.log("TOP WRITERS", topWriters);
+  // console.log("TOP WRITERS", topWriters);
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
   return (

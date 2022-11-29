@@ -23,7 +23,7 @@ export function Test() {
       }),
     }).then((res) => res);
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
   }
 
   // const myFunc = () => {
@@ -93,8 +93,8 @@ export function Test4() {
       },
     }).then((res) => res);
     const data = await res.json();
-    console.log(typeof data[0].creator);
-    console.log(data);
+    // console.log(typeof data[0].creator);
+    // console.log(data);
   }
 
   return <button onClick={clickMe}>ALL BLOGS!</button>;
@@ -110,7 +110,7 @@ export function Test5() {
       },
     }).then((res) => res);
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
   }
 
   return <button onClick={clickMe}>ALL USERS!</button>;
@@ -124,7 +124,7 @@ export function Test6() {
       "Content-Type": "application/json",
     }).then((res) => res);
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
   }
   return <button onClick={clickMe}>All Blogs!</button>;
 }
