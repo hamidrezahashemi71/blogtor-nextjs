@@ -135,6 +135,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({params}: any) {
   const singleBlog: SingleBlog = await getSingleBlog(params._id);
+  if (singleBlog.msg) return {notFound: true};
   return {
     props: {
       singleBlog,

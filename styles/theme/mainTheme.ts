@@ -15,6 +15,7 @@ declare module "@mui/material/Typography" {
     title: true;
     bigTitles: true;
     fadeText: true;
+    fourOfour: true;
   }
 }
 
@@ -161,6 +162,17 @@ export const mainTheme = createTheme({
             textDecoration: "none",
             color: primary.title,
             fontSize: 27,
+            // textAlign: "center",
+          },
+        },
+        {
+          props: {variant: "fourOfour"},
+          style: {
+            fontFamily: "Noto Sans",
+            fontWeight: 900,
+            textDecoration: "none",
+            color: primary.dark,
+            fontSize: 200,
             // textAlign: "center",
           },
         },

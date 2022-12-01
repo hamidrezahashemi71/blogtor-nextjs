@@ -4,6 +4,7 @@ import {Container, Grid, Typography} from "@mui/material";
 import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 
 const TopWriters = ({topWriters}: TopWriters) => {
+  // console.log(topWriters);
   return (
     <Container
       maxWidth={false}
