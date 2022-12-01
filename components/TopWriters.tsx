@@ -27,28 +27,28 @@ const TopWriters = ({topWriters}: TopWriters) => {
           alignItems: "center",
           mb: "20px",
           ml: 0,
+          gap: "5px",
         }}>
-        <Typography
-          variant='logo'
-          sx={{display: "flex", alignItems: "center", gap: "2px"}}>
+        <Typography variant='logo' sx={{display: "flex", alignItems: "center"}}>
           <WorkspacePremiumOutlinedIcon />
           Top
         </Typography>
         <Typography variant='title'>Writers</Typography>
       </Container>
       {topWriters.length ? (
-        <Grid container spacing={10} width={"100%"}>
+        <Grid container spacing={5} width={"50%"}>
           {topWriters.map((writer: Writer) => (
-            <Grid key={writer._id} item md={4} xs={12}>
+            <Grid key={writer._id} item md={12} xs={12}>
               <WriterCard writer={writer} />
             </Grid>
           ))}
         </Grid>
       ) : (
-        <Typography>Hanooz Blogi neveshte nashode</Typography>
+        <Typography>Hanooz Useri sabtenam nakarde</Typography>
       )}
     </Container>
   );
 };
 
 export default TopWriters;
+

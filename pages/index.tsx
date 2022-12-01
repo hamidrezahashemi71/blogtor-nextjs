@@ -36,5 +36,6 @@ export async function getStaticProps() {
       topWriters,
       topBlogs,
     },
+    revalidate: 1,
   };
 }

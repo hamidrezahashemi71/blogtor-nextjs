@@ -4,6 +4,7 @@ import BlogCard from "../components/BlogCard";
 import {TopBlogs, Blog} from "../lib/interfaces";
 
 const TopBlogs = ({topBlogs}: TopBlogs) => {
+  console.log(topBlogs);
   return (
     <Container
       maxWidth={false}
@@ -27,10 +28,9 @@ const TopBlogs = ({topBlogs}: TopBlogs) => {
           alignItems: "center",
           mb: "20px",
           ml: 0,
+          gap: "5px",
         }}>
-        <Typography
-          variant='logo'
-          sx={{display: "flex", alignItems: "center", gap: "2px"}}>
+        <Typography variant='logo' sx={{display: "flex", alignItems: "center"}}>
           <AppShortcutOutlinedIcon />
           Top
         </Typography>

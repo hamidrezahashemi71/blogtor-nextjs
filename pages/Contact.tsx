@@ -1,6 +1,6 @@
 import {NextPageWithLayout} from "./_app";
 import {Container} from "@mui/system";
-import {Button, TextField, Typography} from "@mui/material";
+import {Button, Grid, TextField, Typography} from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -36,21 +36,23 @@ const Contact: NextPageWithLayout = () => {
           sx={{display: "flex", alignItems: "center", gap: "2px"}}>
           Contact
         </Typography>
-        <Typography variant='title'>Us</Typography>
+        <Typography variant='bigTitles'>Us</Typography>
       </Container>
-      <Container
-        disableGutters
+      <Grid
+        container
+        spacing={10}
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: "80px",
+          px: "80px",
           justifyContent: "center",
         }}>
-        <Container
-          disableGutters
+        <Grid
+          item
+          md={6}
+          xs={12}
           sx={{
             width: "100%",
-            ml: "152px",
             display: "flex",
             flexDirection: "column",
             gap: "24px",
@@ -93,16 +95,18 @@ const Contact: NextPageWithLayout = () => {
             style={{width: "100%", backgroundColor: "transparent"}}
           />
           <Button variant='normalButtons'>Send Message</Button>
-        </Container>
+        </Grid>
 
-        <Container
-          disableGutters
+        <Grid
+          item
+          md={6}
+          xs={12}
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "start",
+            justifyContent: "start",
             width: "50%",
-            mr: "337px",
           }}>
           <Typography variant='fadeText' sx={{mb: "40px"}}>
             Dynamically underwhelm integrated outsourcing via timely models.
@@ -136,8 +140,8 @@ const Contact: NextPageWithLayout = () => {
             <InstagramIcon sx={{color: "primary.dark"}} />
             <TelegramIcon sx={{color: "primary.dark"}} />
           </Container>
-        </Container>
-      </Container>
+        </Grid>
+      </Grid>
     </Container>
   );
 };

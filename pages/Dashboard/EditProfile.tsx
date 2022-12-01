@@ -45,7 +45,7 @@ const EditProfile: NextPageWithLayout = () => {
       eidtedWriter?.bio
     );
     if (editWriterData.msg === "ok") {
-      router.push("/Dashboard/");
+     window.location.assign("/Dashboard/");
       toast.success("Profile Edited Successfully!", {theme: "dark"});
     }
     if (editWriterData.msg === "bad input")

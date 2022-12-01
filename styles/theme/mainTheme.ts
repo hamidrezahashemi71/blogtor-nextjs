@@ -13,6 +13,7 @@ declare module "@mui/material/Typography" {
     logo: true;
     mainText: true;
     title: true;
+    bigTitles: true;
     fadeText: true;
   }
 }
@@ -150,6 +151,17 @@ export const mainTheme = createTheme({
             color: primary.title,
             fontSize: 17,
             textAlign: "center",
+          },
+        },
+        {
+          props: {variant: "bigTitles"},
+          style: {
+            fontFamily: "Noto Sans",
+            fontWeight: 600,
+            textDecoration: "none",
+            color: primary.title,
+            fontSize: 27,
+            // textAlign: "center",
           },
         },
         {

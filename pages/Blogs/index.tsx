@@ -9,7 +9,8 @@ import BookIcon from "@mui/icons-material/Book";
 
 const Blogs = ({allBlogs}: AllBlogs) => {
   const [searchVal, setSearchVal] = useState("");
-  // console.log(allBlogs);
+  console.log(allBlogs);
+
   return (
     <>
       <Head>
@@ -39,10 +40,11 @@ const Blogs = ({allBlogs}: AllBlogs) => {
             alignItems: "center",
             mb: "20px",
             ml: 0,
+            gap: "5px",
           }}>
           <Typography
             variant='logo'
-            sx={{display: "flex", alignItems: "center", gap: "2px"}}>
+            sx={{display: "flex", alignItems: "center"}}>
             <BookIcon />
             All
           </Typography>

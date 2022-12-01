@@ -39,10 +39,11 @@ const Writers = ({allWriters}: AllWriters) => {
             alignItems: "center",
             mb: "20px",
             ml: 0,
+            gap: "5px",
           }}>
           <Typography
             variant='logo'
-            sx={{display: "flex", alignItems: "center", gap: "2px"}}>
+            sx={{display: "flex", alignItems: "center"}}>
             <AttributionIcon />
             All
           </Typography>

@@ -4,6 +4,9 @@ import {getSingleWriter, getAllWriters, getBlogsByWriter} from "../../lib/apis";
 import {SingleWriterProps, SingleWriter} from "../../lib/interfaces";
 
 const SingleWriterPage = ({singleWriter, blogsByWriter}: SingleWriterProps) => {
+  // console.log("SINGLE WRITER", singleWriter);
+  // const {name} = singleWriter;
+  // console.log("NAME", name);
   if (!singleWriter._id) return <h1>hamchin khari nadarim</h1>;
   return <div>SingleWriter</div>;
 };

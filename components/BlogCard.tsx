@@ -39,7 +39,7 @@ const BlogCard = ({blog}: any) => {
         <DateRangeOutlinedIcon sx={{color: "primary.fadeText", fontSize: 12}} />
         <Divider orientation='vertical' flexItem />
         <Typography variant='fadeText'>
-          {blog.averageScore} from {blog.rateCount} votes!
+          {blog.averageScore.toFixed(2)} from {blog.rateCount} votes!
         </Typography>
       </Container>
       <Container disableGutters>
