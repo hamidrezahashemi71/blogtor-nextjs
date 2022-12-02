@@ -19,6 +19,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import Loading from "../components/Loading";
 
 const Register: NextPageWithLayout = () => {
   const router = useRouter();
@@ -74,7 +75,7 @@ const Register: NextPageWithLayout = () => {
     router.push("/Dashboard/MyBlogs");
   }
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loading />;
   // console.log("NAME", regInfo.name, "USERNAME", regInfo.username);
   return (
     <Container maxWidth='xs'>

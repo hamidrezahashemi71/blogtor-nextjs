@@ -19,6 +19,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import Loading from "../components/Loading";
 
 const Login: NextPageWithLayout = () => {
   const router = useRouter();
@@ -76,7 +77,7 @@ const Login: NextPageWithLayout = () => {
     toast.success(`Welcome ${currentUser.name}`);
   }
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loading />;
   // console.log("USERNAME", loginInfo.username, "PASSWORD", loginInfo.password);
   return (
     <Container maxWidth='xs'>

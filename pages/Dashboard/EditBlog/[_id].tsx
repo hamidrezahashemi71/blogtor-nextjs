@@ -4,6 +4,7 @@ import {editBlog, deleteBlog, getSingleBlog} from "../../../lib/apis";
 import {useRouter} from "next/router";
 import {BlogInfo} from "../../../lib/interfaces";
 import {toast} from "react-toastify";
+import Loading from "../../../components/Loading";
 
 const EditBlog = () => {
   const router = useRouter();
@@ -51,7 +52,7 @@ const EditBlog = () => {
   };
 
   // console.log("Our Data", bloginfo);
-  if (!bloginfo) return <h1>Loading...</h1>;
+  if (!bloginfo) return <Loading />;
   return (
     <div>
       <input

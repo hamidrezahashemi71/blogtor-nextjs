@@ -7,11 +7,12 @@ import {selectUser, setCurrentUser} from "../State/Slices/CurrentUserSlice";
 import {useRouter} from "next/router";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Loading from "../components/Loading";
 
 const StateProvider = ({children}: any) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const thisUser = useSelector(selectUser);
 
   useEffect(() => {
@@ -22,10 +23,10 @@ const StateProvider = ({children}: any) => {
     const currentUser = await getCurrentUser();
     // console.log(currentUser);
     dispatch(setCurrentUser(currentUser));
-    setLoading(false);
+    // setLoading(false);
   }
 
-  if (loading) return <h1>Loading...</h1>;
+  if (!thisUser) return <Loading />;
   if (router.asPath.includes("Dashboard"))
     return (
       <Panel>

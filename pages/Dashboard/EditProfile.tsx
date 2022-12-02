@@ -7,6 +7,7 @@ import {useSelector} from "react-redux";
 import {CurrentUser} from "../../lib/interfaces";
 import {useRouter} from "next/router";
 import {toast} from "react-toastify";
+import Loading from "../../components/Loading";
 
 const EditProfile: NextPageWithLayout = () => {
   const currentUser: CurrentUser | null = useSelector(selectUser);
@@ -45,7 +46,7 @@ const EditProfile: NextPageWithLayout = () => {
       eidtedWriter?.bio
     );
     if (editWriterData.msg === "ok") {
-     window.location.assign("/Dashboard/");
+      window.location.assign("/Dashboard/");
       toast.success("Profile Edited Successfully!", {theme: "dark"});
     }
     if (editWriterData.msg === "bad input")
@@ -65,7 +66,7 @@ const EditProfile: NextPageWithLayout = () => {
     submitAvatar();
   };
 
-  if (!eidtedWriter) return <h1>Loading...</h1>;
+  if (!eidtedWriter) return <Loading />;
   return (
     <div>
       <input type='file' onChange={(e) => setFile(e.target.files![0])} />

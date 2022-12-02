@@ -32,6 +32,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
 import AttributionIcon from "@mui/icons-material/Attribution";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import Loading from "../components/Loading";
 
 const drawerWidth: number = 240;
 
@@ -137,7 +138,7 @@ const Panel = ({children}: React.PropsWithChildren<{}>) => {
     fetchUser();
   }, []);
 
-  if (loading) return <h1>Loading ...</h1>;
+  if (loading) return <Loading />;
   return (
     <>
       <Box sx={{display: "flex"}}>
@@ -145,7 +146,7 @@ const Panel = ({children}: React.PropsWithChildren<{}>) => {
           <Toolbar
             sx={{
               display: "flex",
-              pr: "24px", // keep right padding when drawer closed
+              // pr: "24px", // keep right padding when drawer closed
             }}>
             <IconButton
               edge='start'
@@ -177,11 +178,11 @@ const Panel = ({children}: React.PropsWithChildren<{}>) => {
         </AppBar>
         <Drawer variant='permanent' open={open}>
           <Toolbar
+            disableGutters
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-end",
-              px: [1],
             }}>
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
@@ -216,17 +217,18 @@ const Panel = ({children}: React.PropsWithChildren<{}>) => {
             ))}
           </List>
         </Drawer>
-        <Toolbar />
+
         <Container
-          maxWidth='lg'
+          disableGutters
+          maxWidth={false}
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh",
+            // height: "100vh",
           }}>
           <main>{children}</main>
-          <Copyright sx={{pb: 4}} />
+          {/* <Copyright sx={{pb: 4}} /> */}
         </Container>
       </Box>
     </>
