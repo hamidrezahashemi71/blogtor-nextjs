@@ -12,9 +12,9 @@ const Rate = ({singleBlog, rate, setRate}: any) => {
       <Rating
         name='simple-controlled'
         value={rate}
-        onChange={(e) => {
-          // console.log("RATING EVENT", e);
-          setRate(e.target.value);
+        onChange={(e, newValue) => {
+          console.log("RATING EVENT", e);
+          setRate(Number(newValue));
         }}
       />
     </Box>

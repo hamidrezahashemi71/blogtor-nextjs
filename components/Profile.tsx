@@ -20,10 +20,7 @@ const Profile = () => {
   // const dispatch = useDispatch();
   // const router = useRouter();
   // console.log(currentUser);
-  const settings = [
-    {name: "Dashboard", href: "/Dashboard/MyBlogs", id: 1},
-    {name: "Log Out", href: "", id: 2},
-  ];
+  const settings = [{name: "Dashboard", href: "/Dashboard/MyBlogs", id: 1}];
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -90,21 +87,14 @@ const Profile = () => {
           }}
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}>
-          {settings.map((setting) => (
-            <Link href={setting.href} key={setting.id}>
-              <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
-                <Typography
-                  textAlign='center'
-                  onClick={
-                    setting.name === "Log Out"
-                      ? () => setLogoutconfirm(true)
-                      : undefined
-                  }>
-                  {setting.name}
-                </Typography>
-              </MenuItem>
-            </Link>
-          ))}
+          <Link href='/Dashboard/MyBlogs'>
+            <MenuItem onClick={handleCloseUserMenu}>
+              <Typography textAlign='center'>Dashboard</Typography>
+            </MenuItem>
+          </Link>
+          <MenuItem onClick={() => setLogoutconfirm(true)}>
+            <Typography textAlign='center'>Logout</Typography>
+          </MenuItem>
         </Menu>
       </Box>
       {logoutconfirm ? (

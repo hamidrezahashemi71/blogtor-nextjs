@@ -15,7 +15,11 @@ const WriterCard = ({writer}: any) => {
         width: "360px",
         gap: "24px",
       }}>
-      <Link href={`/Writers/${writer._id}`}>
+      <Link
+        href={{
+          pathname: "Writers/[_id]",
+          query: {_id: writer._id},
+        }}>
         <img
           width={"80px"}
           height={"80px"}

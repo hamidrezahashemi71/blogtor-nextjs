@@ -52,7 +52,11 @@ const BlogCard = ({blog}: any) => {
             __html: blog.content.slice(0, 80),
           }}></Typography>
       </Container>
-      <Link href={`/Blogs/${blog._id}`}>
+      <Link
+        href={{
+          pathname: "/Blogs/[_id]",
+          query: {_id: blog._id},
+        }}>
         <Typography
           variant='mainText'
           sx={{
