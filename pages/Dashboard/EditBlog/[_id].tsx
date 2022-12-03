@@ -7,12 +7,15 @@ import Loading from "../../../components/Loading";
 
 import {Button, TextField} from "@mui/material";
 import TextEditor from "../../../components/TextEditor";
+import ModalBox from "../../../components/Modal";
 
 const EditBlog = () => {
   const router = useRouter();
   const blogId = router?.query?._id;
   const [bloginfo, setBloginfo] = useState<BlogInfo | null>(null);
+  const [deleteconfirm, setDeleteconfirm] = useState(false);
   const editorRef = useRef(null);
+  const handleClose = () => setDeleteconfirm(false);
 
   useEffect(() => {
     fetchBlog();
@@ -75,9 +78,20 @@ const EditBlog = () => {
       <Button variant='editButton' onClick={editBlogFunc} sx={{mt: "20px"}}>
         Submit
       </Button>
-      <Button variant='deleteButton' onClick={deleteBlogFunc} sx={{mt: "20px"}}>
+      <Button
+        variant='deleteButton'
+        onClick={() => setDeleteconfirm(true)}
+        sx={{mt: "20px"}}>
         Delete
       </Button>
+      {deleteconfirm ? (
+        <ModalBox
+          type='delete'
+          deleteBlogFunc={deleteBlogFunc}
+          deleteconfirm={deleteconfirm}
+          handleClose={handleClose}
+        />
+      ) : null}
     </>
   );
 };
