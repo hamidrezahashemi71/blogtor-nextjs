@@ -39,6 +39,8 @@ const Comments = ({blogId, submitRate}: any) => {
     const data = await postComment(commentText, blogId);
     setCommentText(" ");
     fetchComments();
+    if (!commentText)
+      return toast.error("You have no comments? send :-|", {theme: "dark"});
     if (data.msg === "bad request: bad inputs")
       toast.error("Comment field can not be empty!", {theme: "dark"});
     if (data.msg === "Unauthorized")

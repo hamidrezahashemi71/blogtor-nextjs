@@ -95,7 +95,7 @@ const Profile = () => {
                         dispatch(signOut());
                         router.push("/");
                       }
-                    : null
+                    : undefined
                 }>
                 {setting.name}
               </Typography>

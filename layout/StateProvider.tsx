@@ -12,7 +12,7 @@ import Loading from "../components/Loading";
 const StateProvider = ({children}: any) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const thisUser = useSelector(selectUser);
 
   useEffect(() => {
@@ -23,10 +23,10 @@ const StateProvider = ({children}: any) => {
     const currentUser = await getCurrentUser();
     // console.log(currentUser);
     dispatch(setCurrentUser(currentUser));
-    // setLoading(false);
+    setLoading(false);
   }
 
-  if (!thisUser) return <Loading />;
+  if (loading) return <Loading />;
   if (router.asPath.includes("Dashboard"))
     return (
       <Panel>

@@ -1,15 +1,18 @@
-import {ReactElement, useEffect, useState} from "react";
-import Panel from "../../../layout/Panel";
+import {useEffect, useState, useRef} from "react";
 import {editBlog, deleteBlog, getSingleBlog} from "../../../lib/apis";
 import {useRouter} from "next/router";
 import {BlogInfo} from "../../../lib/interfaces";
 import {toast} from "react-toastify";
 import Loading from "../../../components/Loading";
 
+import {Button, TextField} from "@mui/material";
+import TextEditor from "../../../components/TextEditor";
+
 const EditBlog = () => {
   const router = useRouter();
   const blogId = router?.query?._id;
   const [bloginfo, setBloginfo] = useState<BlogInfo | null>(null);
+  const editorRef = useRef(null);
 
   useEffect(() => {
     fetchBlog();
@@ -30,7 +33,8 @@ const EditBlog = () => {
     const editBlogData = await editBlog(
       bloginfo?._id,
       bloginfo?.title,
-      bloginfo?.content,
+      // bloginfo?.content,
+      editorRef?.current?.getContent(),
       bloginfo?.imgUrl
     );
     if (editBlogData.msg === "ok") {
@@ -51,38 +55,31 @@ const EditBlog = () => {
     }
   };
 
-  // console.log("Our Data", bloginfo);
+  console.log("Our Data", bloginfo);
   if (!bloginfo) return <Loading />;
   return (
-    <div>
-      <input
-        type='text'
-        value={bloginfo._id}
-        onChange={(e) => setBloginfo({...bloginfo, _id: e.target.value})}
-      />
-      <input
-        type='text'
-        value={bloginfo.title}
+    <>
+      <TextField
+        placeholder='Edit your blog title!'
+        value={bloginfo.title ? bloginfo.title : "No title!"}
+        sx={{mb: "20px", width: "100%"}}
         onChange={(e) => setBloginfo({...bloginfo, title: e.target.value})}
       />
-      <input
-        type='text'
-        value={bloginfo.content}
-        onChange={(e) => setBloginfo({...bloginfo, content: e.target.value})}
-      />
-      <input
-        type='text'
-        value={bloginfo.imgUrl}
+      <TextField
+        placeholder='Change your blog image url!'
+        value={bloginfo.imgUrl ? bloginfo.imgUrl : "No images!"}
+        sx={{mb: "20px", width: "100%"}}
         onChange={(e) => setBloginfo({...bloginfo, imgUrl: e.target.value})}
       />
-      <button onClick={editBlogFunc}>Edit Blog</button>
-      <button onClick={deleteBlogFunc}>Delete Blog</button>
-    </div>
+      <TextEditor initialValue={bloginfo.content} editorRef={editorRef} />
+      <Button variant='editButton' onClick={editBlogFunc} sx={{mt: "20px"}}>
+        Submit
+      </Button>
+      <Button variant='deleteButton' onClick={deleteBlogFunc} sx={{mt: "20px"}}>
+        Delete
+      </Button>
+    </>
   );
-};
-
-EditBlog.getLayout = function getLayout(page: ReactElement) {
-  return <Panel>{page}</Panel>;
 };
 
 export default EditBlog;

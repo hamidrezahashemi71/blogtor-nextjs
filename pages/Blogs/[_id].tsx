@@ -28,6 +28,7 @@ const SingleBlogPage = ({singleBlog}: SingleBlogObj) => {
     if (data.msg === "unathorized")
       toast.error("You should login in order to rate!", {theme: "dark"});
   };
+
   return (
     <>
       <Grid
@@ -61,11 +62,11 @@ const SingleBlogPage = ({singleBlog}: SingleBlogObj) => {
               alignItems: "center",
               gap: "10px",
             }}>
-            <Link href={`/Writers/${singleBlog.creator._id}`}>
+            <Link href={`/Writers/${singleBlog?.creator?._id}`}>
               <Avatar
                 alt='user-avatar'
                 sx={{width: "18px", height: "18px", objectFit: "cover"}}
-                src={`${process.env.DOMAIN}${singleBlog.creator.avatar}`}>
+                src={`${process.env.DOMAIN}${singleBlog?.creator?.avatar}`}>
                 <img
                   width={"18px"}
                   height={"18px"}
@@ -78,7 +79,7 @@ const SingleBlogPage = ({singleBlog}: SingleBlogObj) => {
               </Avatar>
             </Link>
             <Typography variant='fadeText'>
-              {singleBlog.creator.name}
+              {singleBlog?.creator?.name}
             </Typography>
             <Divider orientation='vertical' flexItem />
             <Typography variant='fadeText'>{creationDate}</Typography>
@@ -96,9 +97,8 @@ const SingleBlogPage = ({singleBlog}: SingleBlogObj) => {
           />
           <Typography
             variant='fadeText'
-            sx={{textAlign: "justify", mb: "40px"}}>
-            {singleBlog.content}
-          </Typography>
+            sx={{textAlign: "justify", mb: "40px"}}
+            dangerouslySetInnerHTML={{__html: singleBlog.content}}></Typography>
           <Typography variant='fadeText'>
             This blog was last updated at:{" "}
             <Typography variant='mainText'>{updateDate}</Typography>

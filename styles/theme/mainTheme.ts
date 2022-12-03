@@ -5,6 +5,8 @@ declare module "@mui/material/Button" {
     navButtons: true;
     normalButtons: true;
     outlineButtons: true;
+    editButton: true;
+    deleteButton: true;
   }
 }
 
@@ -35,6 +37,8 @@ const color = {
     mainText: "#555555",
     title: "#222222",
     fadeText: "#777777",
+    edit: "#FFBF00",
+    delete: "#9C254D",
   },
 };
 
@@ -49,25 +53,6 @@ export const mainTheme = createTheme({
   },
 
   components: {
-    // MuiTextField: {
-    //   styleOverrides: {
-    //     root: {
-    //       "&.custom-input": {
-    //         "& fieldset": {
-    //           border: `1px solid ${primary.dark}`,
-    //         },
-    //         "& .MuiInputBase-input:hover + fieldset": {
-    //           border: `2px solid ${primary.dark}`,
-    //         },
-    //         "& .MuiInputBase-input:focus + fieldset": {
-    //           border: `2px solid ${primary.dark}`,
-    //           backgroundColor: primary.light,
-    //         },
-    //       },
-    //     },
-    //   },
-    // },
-
     MuiButton: {
       variants: [
         {
@@ -106,6 +91,38 @@ export const mainTheme = createTheme({
             width: "145px",
             color: primary.light,
             backgroundColor: primary.dark,
+            display: "block",
+            "&:hover": {
+              backgroundColor: primary.light,
+              color: primary.dark,
+            },
+          },
+        },
+        {
+          props: {variant: "editButton"},
+          style: {
+            fontWeight: 700,
+            borderRadius: "6px",
+            width: "75px",
+            padding: "3px",
+            color: primary.mainText,
+            backgroundColor: primary.edit,
+            display: "block",
+            "&:hover": {
+              backgroundColor: primary.light,
+              color: primary.dark,
+            },
+          },
+        },
+        {
+          props: {variant: "deleteButton"},
+          style: {
+            fontWeight: 700,
+            borderRadius: "6px",
+            width: "75px",
+            padding: "3px",
+            color: primary.light,
+            backgroundColor: primary.delete,
             display: "block",
             "&:hover": {
               backgroundColor: primary.light,

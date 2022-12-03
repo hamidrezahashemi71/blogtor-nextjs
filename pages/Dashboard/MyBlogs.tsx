@@ -4,8 +4,9 @@ import {getMyBlogs} from "../../lib/apis";
 import {Container} from "@mui/system";
 import {Blog} from "../../lib/interfaces";
 import BlogCard from "../../components/BlogCard";
-import {Grid, Typography} from "@mui/material";
+import {Grid, Typography, Button} from "@mui/material";
 import Loading from "../../components/Loading";
+import Link from "next/link";
 
 const MyBlogs: NextPageWithLayout = () => {
   const [myblogs, setMyBlogs] = useState([]);
@@ -38,9 +39,24 @@ const MyBlogs: NextPageWithLayout = () => {
       {myblogs.length ? (
         <Grid container spacing={5}>
           {myblogs.map((blog: Blog) => (
-            <Grid item md={6} xs={12}>
-              {" "}
+            <Grid
+              item
+              md={6}
+              xs={12}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "start",
+                gap: "5px",
+              }}>
               <BlogCard blog={blog} />
+              <Container
+                disableGutters
+                sx={{display: "flex", alignItems: "center", gap: "5px"}}>
+                <Link href={`/Dashboard/EditBlog/${blog._id}`}>
+                  <Button variant='editButton'>Edit</Button>
+                </Link>
+              </Container>
             </Grid>
           ))}
         </Grid>

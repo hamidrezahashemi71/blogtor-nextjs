@@ -7,15 +7,14 @@ const nextConfig = {
     TITLE: "Blogtor!",
   },
   images: {
-    images: {
-      remotePatterns: [
-        {
-          protocol: "https",
-          hostname: "localhost:4000",
-        },
-      ],
-      domains: ["images.amcnetworks.com"],
-    },
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "localhost",
+        port: "4000",
+      },
+    ],
+    unoptimized: true,
   },
 };
 

@@ -1,6 +1,4 @@
 import Head from "next/head";
-import {useSelector, useDispatch} from "react-redux";
-import {selectUser} from "../State/Slices/CurrentUserSlice";
 import {getTopWriters, getTopBlogs} from "../lib/apis";
 import {Writer, Blog} from "../lib/interfaces";
 import {Container} from "@mui/material";
@@ -10,8 +8,6 @@ import TopWriters from "../components/TopWriters";
 
 const Home = ({topWriters, topBlogs}: any) => {
   // console.log("TOP WRITERS", topWriters);
-  const currentUser = useSelector(selectUser);
-  const dispatch = useDispatch();
   return (
     <Container maxWidth={false} disableGutters>
       <Head>

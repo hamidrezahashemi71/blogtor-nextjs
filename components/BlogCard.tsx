@@ -26,8 +26,9 @@ const BlogCard = ({blog}: any) => {
         style={{borderRadius: "7px", objectFit: "cover", marginBottom: "24px"}}
         src={`${blog.imgurl}`}
         onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = "/assets/images/default-blog.png";
+          (e.target as HTMLImageElement).onerror = null;
+          (e.target as HTMLImageElement).src =
+            "/assets/images/default-blog.png";
         }}
         alt=''
       />
@@ -39,13 +40,17 @@ const BlogCard = ({blog}: any) => {
         <DateRangeOutlinedIcon sx={{color: "primary.fadeText", fontSize: 12}} />
         <Divider orientation='vertical' flexItem />
         <Typography variant='fadeText'>
-          {blog.averageScore.toFixed(2)} from {blog.rateCount} votes!
+          {blog.averageScore.toFixed(2)} from {blog.rateCount}
+          {blog.rateCount === 1 ? "vote!" : "votes!"}
         </Typography>
       </Container>
       <Container disableGutters>
-        <Typography variant='mainText' sx={{lineHeight: "22px"}}>
-          {blog.content.slice(0, 80)}...
-        </Typography>
+        <Typography
+          variant='mainText'
+          sx={{lineHeight: "22px"}}
+          dangerouslySetInnerHTML={{
+            __html: blog.content.slice(0, 80),
+          }}></Typography>
       </Container>
       <Link href={`/Blogs/${blog._id}`}>
         <Typography

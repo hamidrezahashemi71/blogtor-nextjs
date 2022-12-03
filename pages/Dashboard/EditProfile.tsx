@@ -8,6 +8,10 @@ import {CurrentUser} from "../../lib/interfaces";
 import {useRouter} from "next/router";
 import {toast} from "react-toastify";
 import Loading from "../../components/Loading";
+import Image from "next/image";
+import {Container} from "@mui/system";
+import {Button, Grid, TextField, Tooltip} from "@mui/material";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 const EditProfile: NextPageWithLayout = () => {
   const currentUser: CurrentUser | null = useSelector(selectUser);
@@ -46,7 +50,7 @@ const EditProfile: NextPageWithLayout = () => {
       eidtedWriter?.bio
     );
     if (editWriterData.msg === "ok") {
-      window.location.assign("/Dashboard/");
+      window.location.assign("/Dashboard/MyBlogs");
       toast.success("Profile Edited Successfully!", {theme: "dark"});
     }
     if (editWriterData.msg === "bad input")
@@ -58,7 +62,6 @@ const EditProfile: NextPageWithLayout = () => {
   const submitAvatar = async () => {
     if (!file) return;
     const data = await updateAvatar(file);
-    // console.log(data);
   };
 
   const editProfile = () => {
@@ -68,38 +71,96 @@ const EditProfile: NextPageWithLayout = () => {
 
   if (!eidtedWriter) return <Loading />;
   return (
-    <div>
-      <input type='file' onChange={(e) => setFile(e.target.files![0])} />
-      <img
-        width={"40px"}
-        height={"40px"}
-        style={{
-          objectFit: "cover",
-        }}
-        src={eidtedWriter.avatar}
-        alt='Avatar'
-      />
-      <input
-        type='text'
-        value={eidtedWriter?.name}
-        onChange={(e) =>
-          setEditedWriter({...eidtedWriter, name: e.target.value})
-        }
-      />
-      <input
-        type='text'
-        value={eidtedWriter?.bio}
-        onChange={(e) =>
-          setEditedWriter({...eidtedWriter, bio: e.target.value})
-        }
-      />
-      <button onClick={editProfile}>Edit User</button>
-    </div>
+    <>
+      <Grid
+        container
+        spacing={5}
+        sx={{display: "flex", justifyContent: "space-between"}}>
+        <Grid item md={3} xs={12}>
+          <Container
+            disableGutters
+            maxWidth={false}
+            sx={{
+              mr: "50px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}>
+            <Tooltip title='Click to choose avatar'>
+              <label htmlFor='file-upload' style={{cursor: "pointer"}}>
+                <TextField
+                  type={"file"}
+                  id={"file-upload"}
+                  sx={{display: "none"}}
+                  onChange={(e) =>
+                    setFile((e.target as HTMLInputElement).files![0])
+                  }
+                />
+                <Image
+                  src={eidtedWriter.avatar}
+                  width={120}
+                  height={120}
+                  alt='avatar-picture'
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).onerror = null;
+                    (e.target as HTMLImageElement).src =
+                      "/assets/images/default-blog.png";
+                  }}
+                  style={{borderRadius: "7px", objectFit: "cover"}}
+                />
+              </label>
+            </Tooltip>
+          </Container>
+        </Grid>
+        <Grid
+          item
+          md={9}
+          xs={12}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            gap: "10px",
+          }}>
+          <TextField
+            type={"text"}
+            variant='standard'
+            sx={{
+              width: "300px",
+              bgcolor: "primary.veryLight",
+              px: "10px",
+              borderRadius: "6px",
+            }}
+            value={eidtedWriter?.name}
+            onChange={(e) =>
+              setEditedWriter({...eidtedWriter, name: e.target.value})
+            }
+          />
+          <TextareaAutosize
+            aria-label='bio textarea'
+            minRows={5}
+            placeholder='Biography'
+            style={{
+              width: 300,
+              padding: "10px",
+              borderRadius: "6px",
+              fontSize: "14px",
+            }}
+            onChange={(e) =>
+              setEditedWriter({...eidtedWriter, bio: e.target.value})
+            }
+          />
+        </Grid>
+      </Grid>
+      <Button
+        variant='outlineButtons'
+        sx={{mt: "30px", width: {md: "100%", xs: "300px"}}}
+        onClick={editProfile}>
+        Edit Profile
+      </Button>
+    </>
   );
 };
 
-EditProfile.getLayout = function getLayout(page: ReactElement) {
-  return <Panel>{page}</Panel>;
-};
 
 export default EditProfile;

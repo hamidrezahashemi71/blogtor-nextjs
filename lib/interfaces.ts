@@ -93,6 +93,7 @@ export interface SingleBlog {
   content: string;
   createdAt: string;
   creatorId: string;
+  creator?: Creator | undefined;
   imgurl: string;
   rateCount: number;
   title: string;

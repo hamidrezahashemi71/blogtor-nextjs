@@ -26,9 +26,10 @@ const WriterCard = ({writer}: any) => {
           }}
           src={`${process.env.DOMAIN}${writer.avatar}`}
           alt=''
-          onError={(event) => {
-            event.target.onerror = null;
-            event.target.src = "/assets/images/default-avatar.png";
+          onError={(e) => {
+            (e.target as HTMLImageElement).onerror = null;
+            (e.target as HTMLImageElement).src =
+              "/assets/images/default-avatar.png";
           }}
         />
       </Link>

@@ -3,18 +3,20 @@ import {useEffect, useState} from "react";
 import {setCurrentUser, selectUser} from "../State/Slices/CurrentUserSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {useRouter} from "next/router";
-import {Container} from "@mui/material";
+import {
+  Container,
+  styled,
+  Box,
+  AppBarProps as MuiAppBarProps,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+} from "@mui/material";
 import * as React from "react";
 import Profile from "../components/Profile";
-import Copyright from "../components/Copyright";
-import {styled} from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
-import MuiAppBar, {AppBarProps as MuiAppBarProps} from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
+import MuiAppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -223,12 +225,12 @@ const Panel = ({children}: React.PropsWithChildren<{}>) => {
           maxWidth={false}
           sx={{
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            // height: "100vh",
+            justifyContent: "start",
+            alignItems: "start",
+            px: "20px",
+            py: "100px",
           }}>
           <main>{children}</main>
-          {/* <Copyright sx={{pb: 4}} /> */}
         </Container>
       </Box>
     </>
